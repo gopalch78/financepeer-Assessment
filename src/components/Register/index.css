@@ -1,0 +1,34 @@
+.register-button {
+  font-family: 'Roboto';
+  font-weight: bold;
+  font-size: 14px;
+  color: white;
+  height: 40px;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 2px;
+  background-color: #0b69ff;
+  border-radius: 8px;
+  cursor: pointer;
+  outline: none;
+}
+.error-message {
+  align-self: flex-start;
+  font-size: 12px;
+  margin-top: 3px;
+  margin-bottom: 0px;
+  font-family: 'Roboto';
+  line-height: 16px;
+  color: #ff0b37;
+}
+.register-heading {
+  align-items: self-start;
+  color: greenyellow;
+}
+.register-container {
+  list-style-type: none;
+  display: flex;
+}
+.register-item {
+  margin-right: 20px;
+}
