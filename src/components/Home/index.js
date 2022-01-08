@@ -68,30 +68,33 @@ class Home extends Component {
   }
 
   getPostData = async () => {
-    this.setState({
-      apiStatus: apiStatusConstants.inProgress,
-    })
-    const jwtToken = Cookies.get('jwt_Token')
-    const apiUrl = `https://gopal-financepeer-app.herokuapp.com/getPosts`
+    const url = 'https://gopal-financepeer-app.herokuapp.com/getPosts'
+
+    const jwtToken = Cookies.get('jwt_token')
     const options = {
       method: 'GET',
       headers: {
-        authorization: `bearer ${jwtToken}`,
-        Accept: 'application/json',
+        Authorization: `Bearer ${jwtToken}`,
       },
     }
-    const response = await fetch(apiUrl, options)
-    const fetchedData = await response.json()
-    const updatedData = fetchedData.map(each => ({
-      user_id: each.userId,
-      id: each.id,
-      title: each.title,
-      body: each.body,
-    }))
-    this.setState({
-      postData: updatedData,
-      apiStatus: apiStatusConstants.success,
-    })
+
+    const response = await fetch(url, options)
+
+    if (response.ok === true) {
+      const data = await response.json()
+      const fetchedData = data.map(each => ({
+        userId: each.user_id,
+        id: each.id,
+        title: each.title,
+        body: each.body,
+      }))
+      this.setState({
+        postData: fetchedData,
+        apiStatus: apiStatusConstants.success,
+      })
+    } else {
+      this.setState({apiStatus: apiStatusConstants.failure})
+    }
   }
 
   renderLoadingView = () => (
